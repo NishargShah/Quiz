@@ -1,0 +1,202 @@
+body{
+	overflow: hidden;
+}
+.entry{
+	text-align: center;
+	background-color: skyblue;
+	height: 100vh;
+}
+.step1{
+	padding-top: 20px;
+	color: blue;
+}
+.step2{
+	padding: 1% 10% 10% 10%;
+	font-size: 50px;
+}
+.form-control{
+	padding: 10px;
+	width: 60%;
+	margin: 40px auto;
+}
+.usr{
+	margin-left: -55%;
+	font-size: 20px;
+	margin-bottom: -30px;
+}
+#submit{
+	padding: 5px;
+	width: 50%;
+}
+.quiz{
+	text-align: center;
+	margin-top: 20px;
+}
+.point{
+	text-align: center;
+	margin: 20px 0 -30px 0;
+}
+.question{
+	text-align: center;
+	background-color: white;
+	color: skyblue;
+	border-radius: 8px;
+	padding: 10px;
+	font-size: 30px;
+}
+.progress{
+	margin: 40px 450px -50px 450px;
+}
+.container{
+	background-color: skyblue;
+	margin-top: 100px;
+	width: 40%;
+	padding: 20px;
+	border-radius: 12px;
+}
+.option{
+	background-color: white;
+  	color: black;
+  	text-align: left;
+  	margin: 0px 40px 0 40px; 
+  	height: 60px;
+  	padding-left: 10px;
+  	border-bottom: 1px solid black;
+  	font-family: monospace;
+  	font-size: 20px;
+  	display: flex;
+  	align-items: center;
+  	cursor: pointer;
+}
+.radius_top{
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+}
+.radius_bottom{
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+.next{
+	font-family: monospace;
+	font-size: 20px;
+	position: absolute;
+	bottom: 10px;
+	right: 15px;
+	background-color: white;
+}
+.congo{
+	text-align: center;
+	display: none;
+	background-color: skyblue;
+	height: 700px;
+}
+.type1{
+	color: red;
+	padding-top: 20px;
+}
+.type3{
+	margin-top: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+    .step1{
+    	padding-top: 30px; 
+    	font-size: 30px;
+    }
+    .step2{
+    	font-size: 30px;
+    }
+    .usr{
+    	margin-left: -70%;
+		margin-top: 80px;
+    }
+    .form-control{
+		width: 90%;
+		margin: 40px auto;
+    }
+    #submit{
+    	width: 70%;
+    }
+	.container{
+		margin-top: 50px;
+		width: 100%;
+		padding: 20px;
+	}
+	.quiz{
+		margin-top: 5px;
+	}
+	.point{
+		margin: 0;
+	}
+	.question{
+		font-size: 20px;
+	}
+	.progress{
+		margin: 20px auto -20px auto;
+	}
+	.option{
+	  	margin: 0 20px; 
+	  	height: 50px;
+	  	font-size: 14px;
+	}
+	.type3{
+		margin-top: 100px;
+	}
+}
+@media screen and (max-width: 1000px) and (min-width: 600px) {
+    .entry{
+		height: 1000px;
+	}
+    .step1{
+    	font-size: 50px;
+    }
+    .step2{
+    	font-size: 50px;
+    }
+    .usr{
+    	margin-left: -78%;
+		margin-top: 80px;
+    }
+    .form-control{
+		width: 90%;
+		margin: 40px auto;
+    }
+    #submit{
+    	width: 70%;
+    }
+    .container{
+		margin-top: 50px;
+		width: 100%;
+		padding: 30px;
+	}
+	.quiz{
+		margin-top: 15px;
+	}
+	.point{
+		margin: 20px;
+	}
+	.question{
+		font-size: 30px;
+	}
+	.progress{
+		margin: 40px auto 0px auto;
+	}
+	.option{
+	  	margin: 0 20px; 
+	  	height: 60px;
+	  	font-size: 20px;
+	}
+	.type1{
+		font-size: 50px;
+	}
+	.type2{
+		font-size: 35px;
+	}
+	.type3{
+		margin-top: 150px;
+		font-size: 60px;
+	}
+	.congo{
+		height: 1000px;
+	}
+}

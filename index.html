@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125814692-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-125814692-1');
+	</script>
+</head>
+<body onload="point()">
+<div class="entry">
+	<h1 class="step1">Hello Guys</h1>
+	<h2 class="step2">Welcome To My Quiz</h2>
+	<h4 class="usr">Name:-</h4>
+	<form onsubmit="return false">
+		<input class="form-control" type="text" placeholder="i.e : Nisharg" required><br>
+		<button id="submit" type="submit" class="btn-success">Start Quiz</button>
+	</form>
+</div>
+<div class="container-fluid">
+	<div class="header">
+		<h2 class="quiz">Nisharg's Quiz</h2>
+		<h4 class="point">1/5</h4>
+	</div>
+	<div class="progress">
+  		<div class="progress-bar" role="progressbar" style="width: 20%" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div class="container">
+		<div class="q1">
+			<p class="question"></p><br>
+			<div class="option op1 radius_top"></div>
+			<div class="option op2"></div>
+			<div class="option op3"></div>
+			<div class="option op4 radius_bottom"></div>
+		</div>
+	</div>
+	<div class="footer">
+		<button class="next" onclick="nextpage(event)">Next <i class="fa fa-arrow-right"></i></button>
+	</div>
+</div>
+<div class="congo">
+	<h1 class="type1">Congratulations</h1><br>
+	<h3 class="type2">You Got <b>[ <span class="change">0</span>/5 ]</b> In This Quiz</h3>
+	<h1 class="type3">Thanks For Playing My Quiz</h1>
+</div>
+<!-- script start -->
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
