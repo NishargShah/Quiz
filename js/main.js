@@ -1,6 +1,6 @@
 var UIController = (function () {
 	//  ALL CLASSES THAT ARE USED IN THIS PROJECT
-	DOMData = {
+	var DOMData = {
 		op1: '.op1', op2: '.op2', op3: '.op3', op4: '.op4', op5: '.op5',
 		next: '.next', entry: '.entry', form: 'form',
 		question: '.question', point: '.point',
@@ -53,9 +53,8 @@ var updateController = (function (ui) {
 	};
 
 	// ADD DATA INTO UI
-	var addData =  function(addQuestion, addOptions) {
-		var html;
-		html =
+	var addData =  function(addQuestion, addOptions, once) {
+		var html =
 			'<p class="question">' + addQuestion + '</p><br>' +
 			'<div class="option op1 radius_top">' + addOptions[0] +'</div>' +
 			'<div class="option op2">' + addOptions[1] +'</div>' +
@@ -63,37 +62,49 @@ var updateController = (function (ui) {
 			'<div class="option op4 radius_bottom">' + addOptions[3] +'</div>';
 
 		// ADD DATA TO THE CHILD OF CONTAINER
-		document.querySelector(updateDom.container).insertAdjacentHTML('beforeend', html);
+		if (once) {
+			document.querySelector(updateDom.container).insertAdjacentHTML('beforeend', html);
+		} else {
+			document.querySelector(updateDom.container + ' p').innerHTML = addQuestion;
+			for (var i = 1; i <= 4; i++) {
+				document.querySelector(updateDom.container + ' .op' + i).innerHTML = addOptions[i - 1];
+			}
+		}
+
 	};
 
+	// WHEN YOU CLICK BUTTON THIS FUNCTION FIRED
 	var clickData = function () {
 		var clicked = 0;
-		addData(ui.getQuestion().que1, ui.getOptions().op1);
+		var getQuestion = ui.getQuestion();
+		var getOptions = ui.getOptions();
+		addData(getQuestion.que1, getOptions.op1, true);
 
-		// UPDATE YOUR QUESTION WHEN CLICK
-		var updateQuestion = function() {
-			// addData('que1', 'op1');
-			if (clicked === 1) {
-				// addData()
+		// UPDATE YOUR DATA WHEN CLICK
+		var updateData = function() {
+			for (var i = 0; i <= 3; i++) {
+				if (clicked === i) {
+					var concatIQuestion = 'que' + (i + 2);
+					var concatIOption = 'op' + (i + 2);
+					var loopedQuestion = getQuestion[concatIQuestion];
+					var loopedOption = getOptions[concatIOption];
+					addData(loopedQuestion, loopedOption, false);
+				}
 			}
-		};
-
-		// UPDATE YOUR ANSWER WHEN CLICK
-		var updateOptions = function() {
-
+			if (clicked === 3) {
+				document.querySelector(updateDom.next).innerHTML = 'Result';
+			}
 		};
 
 		// WHEN YOU CLICK BUTTON THIS EVENT FIRED
 		document.querySelector(updateDom.next).addEventListener('click', function () {
-			updateQuestion();
-			updateOptions();
+			updateData();
 			clicked++;
-			console.log(clicked);
 		});
 	};
 
 	return {
-		addData: function() {
+		getUpdateData: function() {
 			return addData()
 		},
 		getClickedData: function () {
