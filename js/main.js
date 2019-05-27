@@ -3,10 +3,9 @@ var UIController = (function () {
 	var DOMData = {
 		op1: '.op1', op2: '.op2', op3: '.op3', op4: '.op4', op5: '.op5',
 		next: '.next', entry: '.entry', form: 'form',
-		question: '.question', point: '.point',
-		progressBar: '.progress-bar',
-		container: '.container',
-		formControl: '.form-control'
+		question: '.question', point: '.point', congo: '.congo',
+		progressBar: '.progress-bar', formControl: '.form-control',
+		container: '.container', containerFluid: '.container-fluid'
 	};
 
 	// ALL QUESTIONS
@@ -70,7 +69,6 @@ var updateController = (function (ui) {
 				document.querySelector(updateDom.container + ' .op' + i).innerHTML = addOptions[i - 1];
 			}
 		}
-
 	};
 
 	// WHEN YOU CLICK BUTTON THIS FUNCTION FIRED
@@ -93,20 +91,38 @@ var updateController = (function (ui) {
 			}
 			if (clicked === 3) {
 				document.querySelector(updateDom.next).innerHTML = 'Result';
+			} else if (clicked === 4) {
+				document.querySelector(updateDom.containerFluid).style.display = 'none';
+				document.querySelector(updateDom.congo).style.display = 'block';
 			}
+		};
+
+		// INCREASE PERCENTAGE IN UI BY 20
+		var IncreasePercentage = function () {
+			var width = document.querySelector(updateDom.progressBar).style.width.split('%');
+			width = parseInt(width[0]) + 20;
+			document.querySelector(updateDom.progressBar).style.width = width + '%';
+		};
+
+		var IncreasePoint = function () {
+			var pointValue = document.querySelector(updateDom.point).innerHTML.split('/');
+			pointValue = parseInt(pointValue[0]) + 1;
+			document.querySelector(updateDom.point).innerHTML = pointValue + '/5';
 		};
 
 		// WHEN YOU CLICK BUTTON THIS EVENT FIRED
 		document.querySelector(updateDom.next).addEventListener('click', function () {
 			updateData();
+			IncreasePercentage();
+			IncreasePoint();
 			clicked++;
 		});
 	};
 
 	return {
-		getUpdateData: function() {
-			return addData()
-		},
+		// getUpdateData: function() {
+		// 	return addData()
+		// },
 		getClickedData: function () {
 			return clickData()
 		}
