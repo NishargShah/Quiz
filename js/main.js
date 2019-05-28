@@ -2,14 +2,15 @@ var UIController = (function () {
 	//  ALL CLASSES THAT ARE USED IN THIS PROJECT
 	var DOMData = {
 		op1: '.op1', op2: '.op2', op3: '.op3', op4: '.op4', op5: '.op5',
-		next: '.next', entry: '.entry', form: 'form',
-		question: '.question', point: '.point', congo: '.congo',
+		next: '.next', entry: '.entry', form: 'form', point: '.point',
+		question: '.question', option: '.option', congo: '.congo',
 		progressBar: '.progress-bar', formControl: '.form-control',
-		container: '.container', containerFluid: '.container-fluid'
+		container: '.container', containerFluid: '.container-fluid',
+        clicked: 0,
 	};
 
 	// ALL QUESTIONS
-	var question = {
+	var questions = {
 		que1: "How Many Popular Blog Nisharg Have?",
 		que2: "How Many Subscribers Are Nisharg Have In His Youtube Channel?",
 		que3: "How Many Programming Languages Nisharg Knows Perfectly?",
@@ -26,12 +27,13 @@ var UIController = (function () {
 		op5: ["HTML, CSS, Js", "HTML, CSS, Bootstrap, Js", "HTML, CSS, Bootstrap, JQuery", "HTML, CSS, Bootstrap, Js, JQuery"]
 	};
 
+	// RETURN THE FUNCTION OF UIController
 	return {
 		getDom: function () {
 			return DOMData
 		},
-		getQuestion: function () {
-			return question
+		getQuestions: function () {
+			return questions
 		},
 		getOptions: function () {
 			return options
@@ -43,14 +45,6 @@ var updateController = (function (ui) {
 	// ACCESS UIController DOMs VARIABLE
 	var updateDom = ui.getDom();
 
-	//
-	var Information = function (que, op, correct) {
-		this.que = que;
-		this.op = op;
-		this.correct = correct;
-		// 23413  12302 UIController.question.que1, UIController.options.op1, UIController.options.op1[2]
-	};
-
 	// ADD DATA INTO UI
 	var addData =  function(addQuestion, addOptions, once) {
 		var html =
@@ -60,7 +54,7 @@ var updateController = (function (ui) {
 			'<div class="option op3">' + addOptions[2] +'</div>' +
 			'<div class="option op4 radius_bottom">' + addOptions[3] +'</div>';
 
-		// ADD DATA TO THE CHILD OF CONTAINER
+		// ADD DATA TO THE CHILD OF CONTAINER AND CHECK TRUE OR FALSE FOR INSERT OR REPLACE
 		if (once) {
 			document.querySelector(updateDom.container).insertAdjacentHTML('beforeend', html);
 		} else {
@@ -71,65 +65,97 @@ var updateController = (function (ui) {
 		}
 	};
 
-	// WHEN YOU CLICK NEXT BUTTON THIS FUNCTION FIRED
+	// PROVIDE DATA WHEN YOU CLICK ON NEXT BUTTON
 	var clickData = function () {
-		var clicked = 0;
-		var getQuestion = ui.getQuestion();
-		var getOptions = ui.getOptions();
-		addData(getQuestion.que1, getOptions.op1, true);
+        var getQuestions = ui.getQuestions();
+        var getOptions = ui.getOptions();
 
-		// UPDATE YOUR DATA WHEN CLICK
-		var updateData = function() {
-			for (var i = 0; i <= 3; i++) {
-				if (clicked === i) {
-					var concatIQuestion = 'que' + (i + 2);
-					var concatIOption = 'op' + (i + 2);
-					var loopedQuestion = getQuestion[concatIQuestion];
-					var loopedOption = getOptions[concatIOption];
-					addData(loopedQuestion, loopedOption, false);
-				}
-			}
-			if (clicked === 3) {
-				document.querySelector(updateDom.next).innerHTML = 'Result';
-			} else if (clicked === 4) {
-				document.querySelector(updateDom.containerFluid).style.display = 'none';
-				document.querySelector(updateDom.congo).style.display = 'block';
-			}
-		};
+        // THIS FUNCTION FIRED INITIALLY
+        var initiallyData = function () {
+            addData(getQuestions.que1, getOptions.op1, true);
+        };
 
-		// INCREASE PERCENTAGE IN UI BY 20
-		var IncreasePercentage = function () {
+        var updateData = function() {
+            for (var i = 0; i <= 3; i++) {
+                if (ui.getDom().clicked === i) {
+                    var concatIQuestion = 'que' + (i + 2);
+                    var concatIOption = 'op' + (i + 2);
+                    var loopedQuestion = getQuestions[concatIQuestion];
+                    var loopedOption = getOptions[concatIOption];
+                    addData(loopedQuestion, loopedOption, false);
+                }
+            }
+            if (ui.getDom().clicked === 3) {
+                document.querySelector(updateDom.next).innerHTML = 'Result';
+            } else if (ui.getDom().clicked === 4) {
+                document.querySelector(updateDom.containerFluid).style.display = 'none';
+                document.querySelector(updateDom.congo).style.display = 'block';
+            }
+            ui.getDom().clicked++;
+        };
+
+        // INCREASE PERCENTAGE IN UI BY 20
+		var increasePercentage = function () {
 			var width = document.querySelector(updateDom.progressBar).style.width.split('%');
 			width = parseInt(width[0]) + 20;
 			document.querySelector(updateDom.progressBar).style.width = width + '%';
 		};
 
-		var IncreasePoint = function () {
+        // INCREASE POINT IN UI BY 1
+		var increasePoint = function () {
 			var pointValue = document.querySelector(updateDom.point).innerHTML.split('/');
 			pointValue = parseInt(pointValue[0]) + 1;
 			document.querySelector(updateDom.point).innerHTML = pointValue + '/5';
 		};
 
-		// WHEN YOU CLICK BUTTON THIS EVENT FIRED
-		document.querySelector(updateDom.next).addEventListener('click', function () {
-			updateData();
-			IncreasePercentage();
-			IncreasePoint();
-			clicked++;
-		});
+		// RETURN OF clickData
+		return {
+		    getInitiallyData: function () {
+		        return initiallyData();
+            },
+            getUpdateData: function () {
+                return updateData();
+            },
+            getIncreasePercentage: function () {
+                return increasePercentage();
+            },
+            getIncreasePoint: function () {
+                return increasePoint();
+            },
+        }
 	};
+
+    // WHEN YOU CLICK NEXT BUTTON THIS FUNCTION FIRED
+	var clickOnNext = function () {
+        // THIS EVENT FIRED INITIALLY
+        clickData().getInitiallyData();
+
+        // WHEN YOU CLICK NEXT BUTTON THIS EVENT FIRED
+        document.querySelector(updateDom.next).addEventListener('click', function () {
+            clickData().getUpdateData();
+            clickData().getIncreasePercentage();
+            clickData().getIncreasePoint();
+        });
+    };
 
 	var clickOnOption = function () {
-
+	    var optionVar = document.querySelectorAll(updateDom.option);
+        for (var i = 0; i < 4; i++) {
+            optionVar[i].addEventListener('click', function () {
+                this.style.backgroundColor = "green";
+                console.log('lol');
+            });
+        }
 	};
 
+    // RETURN THE FUNCTION OF updateController
 	return {
-		// getUpdateData: function() {
-		// 	return addData()
-		// },
-		getClickedData: function () {
-			return clickData()
-		}
+        getClickOnNext: function () {
+            return clickOnNext();
+        },
+        getClickOnOption: function () {
+            return clickOnOption()
+        },
 	}
 })(UIController);
 
@@ -147,10 +173,12 @@ var controller = (function (ui, update) {
 		});
 	};
 
+    // RETURN THE FUNCTION OF controller
 	return {
 		init: function () {
 			eventHandler();
-			update.getClickedData();
+			update.getClickOnNext();
+			// update.getClickOnOption();
 		}
 	}
 })(UIController, updateController);
