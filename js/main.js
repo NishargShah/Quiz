@@ -6,7 +6,7 @@ var UIController = (function () {
 		question: '.question', option: '.option', congo: '.congo',
 		progressBar: '.progress-bar', formControl: '.form-control',
 		container: '.container', containerFluid: '.container-fluid',
-        clicked: 0
+        change: '.change', clicked: 0, score: 0
 	};
 
 	// ALL QUESTIONS
@@ -63,6 +63,7 @@ var updateController = (function (ui) {
 
 	// ADD DATA INTO UI
 	var addData =  function(addQuestion, addOptions, once) {
+	    // ADD HTML DYNAMICALLY WHEN EVERY CALL
 		var html =
 			'<p class="question">' + addQuestion + '</p><br>' +
 			'<div class="option op1 radius_top">' + addOptions[0] +'</div>' +
@@ -88,6 +89,7 @@ var updateController = (function (ui) {
             addData(getQuestions.que1, getOptions.op1, true);
         };
 
+        // REPLACE DATA WHEN NEXT BUTTON PRESSED
         var updateData = function() {
             for (var i = 0; i <= 3; i++) {
                 if (clicked === i) {
@@ -143,31 +145,42 @@ var updateController = (function (ui) {
         var optionVar = document.querySelectorAll(updateDom.option);
         var answers = ui.getAnswers();
 
-        // var answer = [1, 2, 3, 0, 2];
+        // WHEN YOU CLICK ON OPTION THIS EVENT IS FIRED
         for (var i = 0; i < optionVar.length; i++) {
             optionVar[i].addEventListener('click', function (current) {
                 // CURRENT OPTION WHEN YOU CLICK
                 var currentLength = current.target.classList[1];
                 var currentVar = (currentLength.substr(currentLength.length - 1)) - 1;
-                console.log('current', currentVar);
 
-                // GET ANSWERS
+                // GET CORRECT ANSWER
                 for (var i = 0; i <= 4; i++) {
                     if (clicked === i) {
                         var concatIAnswer = 'ans' + (i + 1);
-                        var loopedAnswer = answers[concatIAnswer][1];
-                        console.log('correctAnswer', loopedAnswer);
-
-                        if (loopedAnswer === currentVar) {
-                            optionVar[currentVar].style.backgroundColor = "green";
-                        } else {
-                            optionVar[currentVar].style.backgroundColor = "red";
-                        }
+                        var correctAnswer = answers[concatIAnswer][1];
                     }
                 }
-                console.log('clicked', clicked);
+
+                // CHECK IF CURRENT ANSWER AND CURRENT CLICK OPTION IS MATCHED OR NOT
+                if (correctAnswer === currentVar) {
+                    if (optionVar[correctAnswer].style.backgroundColor !== 'green') {
+                        updateDom.score++;
+                    }
+                    optionVar[correctAnswer].style.backgroundColor = "green";
+                } else {
+                    if (optionVar[correctAnswer].style.backgroundColor === 'green' && optionVar[currentVar].style.backgroundColor !== 'red') {
+                        optionVar[currentVar].style.backgroundColor = "white";
+                    } else {
+                        optionVar[currentVar].style.backgroundColor = 'red';
+                    }
+                    optionVar[correctAnswer].style.backgroundColor = "green";
+                }
             });
         }
+    };
+
+    // UPDATE SCORE EVERY TIME WHEN YOU CLICK ON NEXT BUTTON
+    var updateScore = function () {
+        document.querySelector(updateDom.change).innerHTML = updateDom.score;
     };
 
     // SET COLOR WHITE WHEN CLICK ON NEXT
@@ -189,6 +202,7 @@ var updateController = (function (ui) {
             clickData().getIncreasePercentage();
             clickData().getIncreasePoint();
             setBG2White();
+            updateScore();
         });
     };
 
@@ -213,7 +227,7 @@ var controller = (function (ui, update) {
 			document.querySelector(controllerDOM.next).style.display = 'block';
 			document.querySelector(controllerDOM.entry).style.display = 'none';
 			const name = document.querySelector(controllerDOM.formControl).value;
-			// alert("Welcome " + name + "");
+			alert("Welcome " + name + "");
 		});
 	};
 
