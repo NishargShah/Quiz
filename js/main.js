@@ -6,7 +6,7 @@ var UIController = (function () {
 		question: '.question', option: '.option', congo: '.congo',
 		progressBar: '.progress-bar', formControl: '.form-control',
 		container: '.container', containerFluid: '.container-fluid',
-        clicked: 0,
+        clicked: 0
 	};
 
 	// ALL QUESTIONS
@@ -27,6 +27,15 @@ var UIController = (function () {
 		op5: ["HTML, CSS, Js", "HTML, CSS, Bootstrap, Js", "HTML, CSS, Bootstrap, JQuery", "HTML, CSS, Bootstrap, Js, JQuery"]
 	};
 
+	// ALL ANSWER
+    var answers = {
+        ans1: [0, 1],
+        ans2: [1, 2],
+        ans3: [2, 3],
+        ans4: [3, 0],
+        ans5: [4, 2]
+    };
+
 	// RETURN THE FUNCTION OF UIController
 	return {
 		getDom: function () {
@@ -37,13 +46,20 @@ var UIController = (function () {
 		},
 		getOptions: function () {
 			return options
-		}
+		},
+        getAnswers: function () {
+            return answers
+        }
 	}
 })();
 
 var updateController = (function (ui) {
 	// ACCESS UIController DOMs VARIABLE
-	var updateDom = ui.getDom();
+    var updateDom, clicked, getQuestions, getOptions;
+	updateDom = ui.getDom();
+	clicked = updateDom.clicked;
+    getQuestions = ui.getQuestions();
+    getOptions = ui.getOptions();
 
 	// ADD DATA INTO UI
 	var addData =  function(addQuestion, addOptions, once) {
@@ -67,9 +83,6 @@ var updateController = (function (ui) {
 
 	// PROVIDE DATA WHEN YOU CLICK ON NEXT BUTTON
 	var clickData = function () {
-        var getQuestions = ui.getQuestions();
-        var getOptions = ui.getOptions();
-
         // THIS FUNCTION FIRED INITIALLY
         var initiallyData = function () {
             addData(getQuestions.que1, getOptions.op1, true);
@@ -77,7 +90,7 @@ var updateController = (function (ui) {
 
         var updateData = function() {
             for (var i = 0; i <= 3; i++) {
-                if (ui.getDom().clicked === i) {
+                if (clicked === i) {
                     var concatIQuestion = 'que' + (i + 2);
                     var concatIOption = 'op' + (i + 2);
                     var loopedQuestion = getQuestions[concatIQuestion];
@@ -85,13 +98,13 @@ var updateController = (function (ui) {
                     addData(loopedQuestion, loopedOption, false);
                 }
             }
-            if (ui.getDom().clicked === 3) {
+            if (clicked === 3) {
                 document.querySelector(updateDom.next).innerHTML = 'Result';
-            } else if (ui.getDom().clicked === 4) {
+            } else if (clicked === 4) {
                 document.querySelector(updateDom.containerFluid).style.display = 'none';
                 document.querySelector(updateDom.congo).style.display = 'block';
             }
-            ui.getDom().clicked++;
+            clicked++;
         };
 
         // INCREASE PERCENTAGE IN UI BY 20
@@ -125,6 +138,46 @@ var updateController = (function (ui) {
         }
 	};
 
+	// WHEN YOU CLICK ON OPTION THIS FUNCTION IS FIRED
+    var clickOnOption = function () {
+        var optionVar = document.querySelectorAll(updateDom.option);
+        var answers = ui.getAnswers();
+
+        // var answer = [1, 2, 3, 0, 2];
+        for (var i = 0; i < optionVar.length; i++) {
+            optionVar[i].addEventListener('click', function (current) {
+                // CURRENT OPTION WHEN YOU CLICK
+                var currentLength = current.target.classList[1];
+                var currentVar = (currentLength.substr(currentLength.length - 1)) - 1;
+                console.log('current', currentVar);
+
+                // GET ANSWERS
+                for (var i = 0; i <= 4; i++) {
+                    if (clicked === i) {
+                        var concatIAnswer = 'ans' + (i + 1);
+                        var loopedAnswer = answers[concatIAnswer][1];
+                        console.log('correctAnswer', loopedAnswer);
+
+                        if (loopedAnswer === currentVar) {
+                            optionVar[currentVar].style.backgroundColor = "green";
+                        } else {
+                            optionVar[currentVar].style.backgroundColor = "red";
+                        }
+                    }
+                }
+                console.log('clicked', clicked);
+            });
+        }
+    };
+
+    // SET COLOR WHITE WHEN CLICK ON NEXT
+    var setBG2White = function () {
+        var optionVar = document.querySelectorAll(updateDom.option);
+        for (var i = 0; i < 4; i++) {
+            optionVar[i].style.backgroundColor = "white";
+        }
+    };
+
     // WHEN YOU CLICK NEXT BUTTON THIS FUNCTION FIRED
 	var clickOnNext = function () {
         // THIS EVENT FIRED INITIALLY
@@ -135,18 +188,9 @@ var updateController = (function (ui) {
             clickData().getUpdateData();
             clickData().getIncreasePercentage();
             clickData().getIncreasePoint();
+            setBG2White();
         });
     };
-
-	var clickOnOption = function () {
-	    var optionVar = document.querySelectorAll(updateDom.option);
-        for (var i = 0; i < 4; i++) {
-            optionVar[i].addEventListener('click', function () {
-                this.style.backgroundColor = "green";
-                console.log('lol');
-            });
-        }
-	};
 
     // RETURN THE FUNCTION OF updateController
 	return {
@@ -178,7 +222,7 @@ var controller = (function (ui, update) {
 		init: function () {
 			eventHandler();
 			update.getClickOnNext();
-			// update.getClickOnOption();
+			update.getClickOnOption();
 		}
 	}
 })(UIController, updateController);
