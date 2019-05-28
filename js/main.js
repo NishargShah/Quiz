@@ -11,7 +11,7 @@ var UIController = (function () {
 
 	// ALL QUESTIONS
 	var questions = {
-		que1: "How Many Popular Blog Nisharg Have?",
+		que1: "Nisharg Site Name?",
 		que2: "How Many Subscribers Are Nisharg Have In His Youtube Channel?",
 		que3: "How Many Programming Languages Nisharg Knows Perfectly?",
 		que4: "Which Of The Programming Language Blog Nisharg Have?",
@@ -20,20 +20,20 @@ var UIController = (function () {
 
 	// ALL OPTIONS
 	var options = {
-		op1: [1, 2, 3, 4],
-		op2: [100, 150, 200, 250],
-		op3: [3, 4, 5, 6],
+		op1: ['https://nisharg.com', 'https://nisarg.me', 'https://nisharg.tech', 'https://nisharg.me'],
+		op2: ['>=100', '>=250', '>=500', '>=1000'],
+		op3: [3, 5, 7, 9],
 		op4: ["C", "C++", "HTML", "Js"],
 		op5: ["HTML, CSS, Js", "HTML, CSS, Bootstrap, Js", "HTML, CSS, Bootstrap, JQuery", "HTML, CSS, Bootstrap, Js, JQuery"]
 	};
 
 	// ALL ANSWER
     var answers = {
-        ans1: [0, 1],
-        ans2: [1, 2],
-        ans3: [2, 3],
+        ans1: [0, 3],
+        ans2: [1, 1],
+        ans3: [2, 2],
         ans4: [3, 0],
-        ans5: [4, 2]
+        ans5: [4, 1]
     };
 
 	// RETURN THE FUNCTION OF UIController
