@@ -1,203 +1,184 @@
-body{
-	overflow: hidden;
-}
-.entry{
-	text-align: center;
-	background-color: skyblue;
-	height: 100vh;
-}
-.step1{
-	padding-top: 20px;
-	color: blue;
-}
-.step2{
-	padding: 1% 10% 10% 10%;
-	font-size: 50px;
-}
-.form-control{
-	padding: 10px;
-	width: 60%;
-	margin: 40px auto;
-}
-.usr{
-	margin-left: -55%;
-	font-size: 20px;
-	margin-bottom: -30px;
-}
-#submit{
-	padding: 5px;
-	width: 50%;
-}
-.quiz{
-	text-align: center;
-	margin-top: 20px;
-}
-.point{
-	text-align: center;
-	margin: 20px 0 -30px 0;
-}
-.question{
-	text-align: center;
-	background-color: white;
-	color: skyblue;
-	border-radius: 8px;
-	padding: 10px;
-	font-size: 30px;
-}
-.progress{
-	margin: 40px 450px -50px 450px;
-}
-.container{
-	background-color: skyblue;
-	margin-top: 100px;
-	width: 40%;
-	padding: 20px;
-	border-radius: 12px;
-}
-.option{
-	background-color: white;
-  	color: black;
-  	text-align: left;
-  	margin: 0px 40px 0 40px; 
-  	height: 60px;
-  	padding-left: 10px;
-  	border-bottom: 1px solid black;
-  	font-family: monospace;
-  	font-size: 20px;
-  	display: flex;
-  	align-items: center;
-  	cursor: pointer;
-}
-.radius_top{
-	border-top-left-radius: 12px;
-	border-top-right-radius: 12px;
-}
-.radius_bottom{
-	border-bottom-left-radius: 12px;
-	border-bottom-right-radius: 12px;
-}
-.next{
-	font-family: monospace;
-	font-size: 20px;
-	position: absolute;
-	bottom: 10px;
-	right: 15px;
-	background-color: white;
-	display: none;
-}
-.congo{
-	text-align: center;
-	display: none;
-	background-color: skyblue;
-	height: 100vh;
-}
-.type1{
-	color: red;
-	padding-top: 20px;
-}
-.type3{
-	margin-top: 50px;
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-@media only screen and (max-width: 768px) {
-    .step1{
-    	padding-top: 30px; 
-    	font-size: 30px;
-    }
-    .step2{
-    	font-size: 30px;
-    }
-    .usr{
-    	margin-left: -70%;
-		margin-top: 80px;
-    }
-    .form-control{
-		width: 90%;
-		margin: 40px auto;
-    }
-    #submit{
-    	width: 70%;
-    }
-	.container{
-		margin-top: 50px;
-		width: 100%;
-		padding: 20px;
-	}
-	.quiz{
-		margin-top: 5px;
-	}
-	.point{
-		margin: 0;
-	}
-	.question{
-		font-size: 20px;
-	}
-	.progress{
-		margin: 20px auto -20px auto;
-	}
-	.option{
-	  	margin: 0 20px; 
-	  	height: 50px;
-	  	font-size: 14px;
-	}
-	.type3{
-		margin-top: 100px;
-	}
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
-@media screen and (max-width: 1000px) and (min-width: 600px) {
-    .entry{
-		height: 1000px;
-	}
-    .step1{
-    	font-size: 50px;
-    }
-    .step2{
-    	font-size: 50px;
-    }
-    .usr{
-    	margin-left: -78%;
-		margin-top: 80px;
-    }
-    .form-control{
-		width: 90%;
-		margin: 40px auto;
-    }
-    #submit{
-    	width: 70%;
-    }
-    .container{
-		margin-top: 50px;
-		width: 100%;
-		padding: 30px;
-	}
-	.quiz{
-		margin-top: 15px;
-	}
-	.point{
-		margin: 20px;
-	}
-	.question{
-		font-size: 30px;
-	}
-	.progress{
-		margin: 40px auto 0px auto;
-	}
-	.option{
-	  	margin: 0 20px; 
-	  	height: 60px;
-	  	font-size: 20px;
-	}
-	.type1{
-		font-size: 50px;
-	}
-	.type2{
-		font-size: 35px;
-	}
-	.type3{
-		margin-top: 150px;
-		font-size: 60px;
-	}
-	.congo{
-		height: 1000px;
-	}
+
+body {
+  font-family: initial;
+  font-weight: 400;
+  line-height: 1.6;
 }
+
+.entry {
+  text-align: center;
+  background-color: skyblue;
+  height: 100vh;
+  position: relative;
+  display: block;
+}
+
+.entry h1 {
+  padding-top: 2rem;
+  color: blue;
+}
+
+.entry h2 {
+  padding-top: 1rem;
+  font-size: 3rem;
+}
+
+@media (max-width: 575.98px) {
+  .entry h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.entry .form__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.entry .form__group label {
+  margin-bottom: 0;
+  align-self: flex-start;
+  font-size: 1.4rem;
+}
+
+.entry .form__group input {
+  margin: 1rem 0 2rem 0;
+}
+
+.entry .form__group button {
+  width: 15rem;
+}
+
+.container-fluid {
+  display: none;
+}
+
+.container-fluid .header {
+  text-align: center;
+}
+
+.container-fluid .header h1 {
+  padding-top: 2rem;
+}
+
+.container-fluid .header h4 {
+  padding-top: 1rem;
+  font-weight: bold;
+}
+
+.container-fluid .progress {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0;
+}
+
+.container-fluid .container {
+  background-color: skyblue;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+}
+
+@media (min-width: 1600px) {
+  .container-fluid .container {
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+  }
+}
+
+.container-fluid .container .question {
+  text-align: center;
+  background-color: white;
+  color: skyblue;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+@media (max-width: 575.98px) {
+  .container-fluid .container .question {
+    font-size: 1.5rem;
+  }
+}
+
+.container-fluid .container .option {
+  background-color: white;
+  color: black;
+  text-align: left;
+  margin: 0 2.5rem;
+  height: 4rem;
+  padding-left: 1rem;
+  border-bottom: 1px solid black;
+  font-family: monospace;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 575.98px) {
+  .container-fluid .container .option {
+    margin: 0;
+  }
+}
+
+.container-fluid .container .op1 {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.container-fluid .container .op4 {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 0;
+}
+
+.container-fluid .footer .next {
+  font-family: monospace;
+  font-size: 24px;
+  border-color: var(--primary);
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  display: none;
+}
+
+.container-fluid .footer .next:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.congo {
+  text-align: center;
+  background-color: skyblue;
+  height: 100vh;
+  display: none;
+}
+
+.congo h1:first-child {
+  color: red;
+  padding-top: 2rem;
+}
+
+.congo h2 {
+  padding-top: 1rem;
+}
+
+.congo h1:last-child {
+  padding-top: 1rem;
+}
+
+/*# sourceMappingURL=style.css.map */

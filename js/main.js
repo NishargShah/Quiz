@@ -66,10 +66,10 @@ var updateController = (function (ui) {
 	    // ADD HTML DYNAMICALLY WHEN EVERY CALL
 		var html =
 			'<p class="question">' + addQuestion + '</p><br>' +
-			'<div class="option op1 radius_top">' + addOptions[0] +'</div>' +
+			'<div class="option op1">' + addOptions[0] +'</div>' +
 			'<div class="option op2">' + addOptions[1] +'</div>' +
 			'<div class="option op3">' + addOptions[2] +'</div>' +
-			'<div class="option op4 radius_bottom">' + addOptions[3] +'</div>';
+			'<div class="option op4">' + addOptions[3] +'</div>';
 
 		// ADD DATA TO THE CHILD OF CONTAINER AND CHECK TRUE OR FALSE FOR INSERT OR REPLACE
 		if (once) {
@@ -136,7 +136,7 @@ var updateController = (function (ui) {
             },
             getIncreasePoint: function () {
                 return increasePoint();
-            },
+            }
         }
 	};
 
@@ -166,13 +166,16 @@ var updateController = (function (ui) {
                         updateDom.score++;
                     }
                     optionVar[correctAnswer].style.backgroundColor = "green";
+                    optionVar[correctAnswer].style.color = "white";
                 } else {
                     if (optionVar[correctAnswer].style.backgroundColor === 'green' && optionVar[currentVar].style.backgroundColor !== 'red') {
                         optionVar[currentVar].style.backgroundColor = "white";
                     } else {
                         optionVar[currentVar].style.backgroundColor = 'red';
+                        optionVar[currentVar].style.color = "white";
                     }
                     optionVar[correctAnswer].style.backgroundColor = "green";
+                    optionVar[correctAnswer].style.color = "white";
                 }
             });
         }
@@ -188,6 +191,7 @@ var updateController = (function (ui) {
         var optionVar = document.querySelectorAll(updateDom.option);
         for (var i = 0; i < 4; i++) {
             optionVar[i].style.backgroundColor = "white";
+            optionVar[i].style.color = "black";
         }
     };
 
@@ -213,7 +217,7 @@ var updateController = (function (ui) {
         },
         getClickOnOption: function () {
             return clickOnOption()
-        },
+        }
 	}
 })(UIController);
 
@@ -224,10 +228,11 @@ var controller = (function (ui, update) {
 	// ALL EVENT HANDED BY THIS FUNCTION
 	var eventHandler = function () {
 		document.querySelector(controllerDOM.form).addEventListener('submit', function () {
+			document.querySelector(controllerDOM.containerFluid).style.display = 'block';
 			document.querySelector(controllerDOM.next).style.display = 'block';
 			document.querySelector(controllerDOM.entry).style.display = 'none';
 			const name = document.querySelector(controllerDOM.formControl).value;
-			alert("Welcome " + name + "");
+			alert("Welcome " + name);
 		});
 	};
 
