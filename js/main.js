@@ -6,7 +6,7 @@ let UIController = (() => {
 		question: '.question', option: '.option', congo: '.congo',
 		progressBar: '.progress-bar', formControl: '.form-control',
 		container: '.container', containerFluid: '.container-fluid',
-        change: '.change', clicked: 0, score: 0
+        change: '.change', clicked: 0, score: 0, clickOrNotVar: false
 	};
 
 	// ALL QUESTIONS
@@ -132,6 +132,8 @@ let updateController = (ui => {
         // WHEN YOU CLICK ON OPTION THIS EVENT IS FIRED
         for (let i = 0; i < optionVar.length; i++) {
             optionVar[i].addEventListener('click', current => {
+                // CHECK OPTION CLICKED OR NOT SO NEXT BUTTON REACT FROM THAT
+                updateDom.clickOrNotVar = true;
                 // CURRENT OPTION WHEN YOU CLICK
                 let currentLength, currentVar, concatIAnswer, correctAnswer;
                 currentLength = current.target.classList[1];
@@ -187,11 +189,14 @@ let updateController = (ui => {
 
         // WHEN YOU CLICK NEXT BUTTON THIS EVENT FIRED
         document.querySelector(updateDom.next).addEventListener('click', () => {
-            clickData().getUpdateData();
-            clickData().getIncreasePercentage();
-            clickData().getIncreasePoint();
-            setBG2White();
-            updateScore();
+            if (updateDom.clickOrNotVar) {
+                clickData().getUpdateData();
+                clickData().getIncreasePercentage();
+                clickData().getIncreasePoint();
+                setBG2White();
+                updateScore();
+                updateDom.clickOrNotVar = false;
+            }
         });
     };
 
