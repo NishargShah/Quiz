@@ -16,12 +16,12 @@ let mainController = (() => {
             que2: "How Many Subscribers Are Nisharg Have In His Youtube Channel?",
             que3: "How Many Programming Languages Nisharg Knows Perfectly?",
             que4: "Which Of The Programming Language Blog Nisharg Have?",
-            que5: "This Quiz Is Made In Which Programming Languages?"
+            que5: "This Quiz Is Made In Which Languages?"
         };
 
         // ALL OPTIONS
         const options = {
-            op1: ['https://nisharg.com', 'https://nisarg.me', 'https://nisharg.tech', 'https://nisharg.me'],
+            op1: ['https://nisharg.com', 'https://nisharg.me', 'https://nisharg.tech', 'https://nishargshah.com'],
             op2: ['>=100', '>=250', '>=500', '>=1000'],
             op3: [3, 5, 7, 9],
             op4: ["C", "C++", "HTML", "Js"],
